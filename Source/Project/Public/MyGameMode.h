@@ -1,6 +1,4 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
-
-#pragma once
+﻿#pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
@@ -12,7 +10,10 @@ class UHubMainWidget;
 class ACameraActor;
 class UWBP_FinalRankWidget;
 
-// Chance Card
+/**
+ * Structure representing a single Chance Card.
+ * Contains the text description and an ID number for the effect.
+ */
 USTRUCT(BlueprintType)
 struct FChanceCard
 {
@@ -33,7 +34,12 @@ public:
 };
 
 
-// Game mode class
+/**
+ * AMyGameMode
+ * The central "Brain" of the game.
+ * * It manages the rules, turns, dice rolling, chance cards, and win conditions.
+ */
+
 UCLASS()
 class PROJECT_API AMyGameMode : public AGameModeBase
 {

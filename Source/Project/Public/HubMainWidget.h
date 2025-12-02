@@ -1,6 +1,4 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
-
-#pragma once
+﻿#pragma once
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
@@ -12,14 +10,20 @@ class UCanvasPanel;
 class AABoardTile;
 
 /**
- * Main game HUD - displays player information, turn information, and handles dice rolls
+ * UHubMainWidget
+ * The main HUD (Heads-Up Display) for the game.
+ * It shows player stats (money, owned tiles), turn info, dice results,
+ * and handles all UI interactions like buttons for buying, rolling dice, etc.
  */
+
 UCLASS()
 class PROJECT_API UHubMainWidget : public UUserWidget
 {
     GENERATED_BODY()
 
 public:
+    //Update functions
+
     UFUNCTION(BlueprintCallable, Category = "HUD")
     void UpdateHUDFromGameInstance();
 
@@ -31,6 +35,8 @@ public:
 
     UFUNCTION(BlueprintCallable, Category = "HUD")
     void UpdateOwnedTiles(int32 PlayerID, int32 Count);
+
+    // Button visibility controls
 
     UFUNCTION(BlueprintCallable, Category = "HUD")
     void SetBuyButtonVisible(bool bVisible);
@@ -47,30 +53,34 @@ public:
     UFUNCTION(BlueprintCallable, Category = "HUD")
     void SetRedeemButtonVisible(bool bVisible);
 
+    // Alerts and info
+
     UFUNCTION(BlueprintCallable, Category = "HUD")
     void ShowDiceResult(int32 DiceA, int32 DiceB);
 
     UFUNCTION(BlueprintCallable, Category = "HUD")
     void ShowMessage(const FString& NewMessage, float Duration = 2.0f);
 
-    // Aktualizacja danych karty pola
+    // Tiles card
+
+    // Field card data update
     UFUNCTION(BlueprintCallable, Category = "HUD|Tile")
     void UpdateTileCard(AABoardTile* Tile);
 
-    // Ustawia widoczność przycisku „Podgląd karty”
+    // Sets the visibility of the "Card Preview" button
     UFUNCTION(BlueprintCallable, Category = "HUD|Tile")
     void SetPreviewButtonVisible(bool bVisible);
 
-    // Ustawia widocznosc przycisku ulepszenia
+    // Sets the visibility of the upgrade button
     UFUNCTION(BlueprintCallable, Category = "UI")
     void SetUpgradeButtonVisible(bool bVisible);
 
-    //Music
-    // Dźwięk przy zakupie pola
+    // Music
+    // Sound when purchasing a box
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Audio")
     USoundBase* BuyTileSound;
 
-    // Dźwięk przy otwarciu karty pola oraz dla szansy
+    // Sound when opening a field card and for a chance
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Audio")
     USoundBase* OpenTileCardSound;
 
@@ -81,7 +91,7 @@ public:
 protected:
     virtual void NativeConstruct() override;
 
-    // Funkcje obsługi kliknięć (wewnętrzne)
+    // Click Handling Functions (Internal)
     UFUNCTION() void OnRollDiceClicked();
     UFUNCTION() void OnBuyClicked();
     UFUNCTION() void OnNextTurnClicked();
@@ -94,7 +104,7 @@ protected:
 private:
 
     // Buttons and text fields for the odds card
-    // CHANCE CARD
+    // Chance card
     UPROPERTY(meta = (BindWidgetOptional)) UCanvasPanel* Karta_szansy;
     UPROPERTY(meta = (BindWidgetOptional)) UTextBlock* Opis;
     UPROPERTY(meta = (BindWidgetOptional)) UButton* zamknij;

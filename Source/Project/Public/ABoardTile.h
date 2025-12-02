@@ -1,10 +1,15 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "ABoardTile.generated.h"
+
+/**
+ * AABoardTile
+ * Represents a single tile on the board.
+ * Handles logic for ownership, rent, upgrades (houses/hotels), and mortgage.
+ * Contains visual components (Mesh) and UI (WidgetComponent).
+ */
 
 UCLASS()
 class PROJECT_API AABoardTile : public AActor
@@ -12,7 +17,7 @@ class PROJECT_API AABoardTile : public AActor
 	GENERATED_BODY()
 
 public:	
-	// Sets default values for this actor's properties - constructor
+	// Constructor: Sets default values
 	AABoardTile();
 
 	// Called every frame

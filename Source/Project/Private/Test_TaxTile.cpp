@@ -3,7 +3,7 @@
 #include "PlayerCharacter.h"
 #include "ABoardTile.h"
 
-// Test 1 Sprawdza, czy gracz poprawnie płaci podatek, gdy wejdzie na pole podatkowe.
+// Test 1: Checks if the player pays tax correctly when they enter the tax space.
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FTaxTilePaymentTest, "Game.Tax.Pay", EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
 bool FTaxTilePaymentTest::RunTest(const FString& Parameters)
 {
@@ -22,15 +22,14 @@ bool FTaxTilePaymentTest::RunTest(const FString& Parameters)
     return true;
 }
 
-//Test 2 Sprawdza naliczanie premii czynszowej za posiadanie pełnego zestawu pól typu 1.
+//Test 2: Checks the calculation of the rent premium for having a full set of type 1 fields.
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FSpecialBonusType1Test, "Game.SpecialRent.Type1", EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
 bool FSpecialBonusType1Test::RunTest(const FString& Parameters)
 {
     APlayerCharacter* Player = NewObject<APlayerCharacter>();
 
-    // 2 pola typu 1 - brak bonusu 1.0f
-    for (int i = 0; i < 2; i++)
-    {
+    // 2 fields of type 1 - no bonus 1.0f
+    for (int i = 0; i < 2; i++) {
         AABoardTile* Tile = NewObject<AABoardTile>();
         Tile->SpecialType = 1;
         Player->OwnedTiles.Add(Tile);
@@ -42,7 +41,7 @@ bool FSpecialBonusType1Test::RunTest(const FString& Parameters)
     return true;
 }
 
-//Test 3 Sprawdza zwiększony czynsz dla pól typu 2 w zależności od liczby posiadanych pól tego typu.
+//Test 3: Checks the increased rent for type 2 fields depending on the number of fields of that type owned.
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FSpecialBonusType2RentTest, "Game.SpecialRent.Type2", EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
 bool FSpecialBonusType2RentTest::RunTest(const FString& Parameters)
 {
@@ -60,7 +59,7 @@ bool FSpecialBonusType2RentTest::RunTest(const FString& Parameters)
     return true;
 }
 
-// Test 5 3 pola typ 2
+// Test 4: 3 fields, type 2
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FBonusType2ThreeTilesTest, "Game.RentBonus.Type2.ThreeTiles", EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
 
 bool FBonusType2ThreeTilesTest::RunTest(const FString& Parameters)
@@ -80,7 +79,7 @@ bool FBonusType2ThreeTilesTest::RunTest(const FString& Parameters)
     return true;
 }
 
-//Test 6 Typ 2 dla 4 pól
+//Test 5: Type 2 for 4 fields
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FBonusType2FourTilesTest, "Game.RentBonus.Type2.FourTiles", EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
 
 bool FBonusType2FourTilesTest::RunTest(const FString& Parameters)
@@ -99,7 +98,7 @@ bool FBonusType2FourTilesTest::RunTest(const FString& Parameters)
     return true;
 }
 
-// Test 7 Typ 2 1 pole
+// Test 6: Type 2, 1 field
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FBonusType2OneOrZeroTest, "Game.RentBonus.Type2.NotEnough", EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
 
 bool FBonusType2OneOrZeroTest::RunTest(const FString& Parameters)

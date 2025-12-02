@@ -1,13 +1,19 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
-
-#pragma once
+﻿#pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Components/ArrowComponent.h"
 #include "DiceActor.generated.h"
 
+// Event delegate that allows other classes (like GameMode) to listen for when the dice stops.
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDiceStopped);
+
+/**
+ * ADiceActor
+ * Represents a physical dice in the game.
+ * It simulates physics (rolling), detects when it has stopped moving,
+ * and calculates the result based on which face is pointing up.
+ */
 
 UCLASS()
 class PROJECT_API ADiceActor : public AActor
@@ -83,7 +89,7 @@ protected:
     int32   StableFrames = 0;
 
     // COMPONENTS
-    //Dice arrows
+    // Dice arrows
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Dice")
     UArrowComponent* Arrow1;
 

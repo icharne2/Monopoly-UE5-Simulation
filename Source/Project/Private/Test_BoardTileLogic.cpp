@@ -2,7 +2,7 @@
 #include "Misc/AutomationTest.h"
 #include "ABoardTile.h"
 
-//  Test 1 Base Rent 
+//  Test 1: Base Rent 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FBoardTile_BaseRentTest, "Game.Tile.Rent.Base", EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
 
 bool FBoardTile_BaseRentTest::RunTest(const FString& Parameters)
@@ -18,7 +18,7 @@ bool FBoardTile_BaseRentTest::RunTest(const FString& Parameters)
 }
 
 
-//  Test 2 Upgraded Rent 
+//  Test 2: Upgraded Rent 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FBoardTile_UpgradedRentTest, "Game.Tile.Rent.Upgraded", EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
 
 bool FBoardTile_UpgradedRentTest::RunTest(const FString& Parameters)
@@ -60,7 +60,7 @@ bool FBoardTile_MortgageTest::RunTest(const FString& Parameters)
     return true;
 }
 
-//  Test 4 Upgrade Restrictions 
+//  Test 4: Upgrade Restrictions 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FBoardTile_MaxUpgradeTest, "Game.Tile.Upgrade.Restrictions", EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
 
 bool FBoardTile_MaxUpgradeTest::RunTest(const FString& Parameters)

@@ -15,9 +15,7 @@ public class Project : ModuleRules
 		// Uncomment if you are using Slate UI
 		 PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
 
-        // Wymagane dla FAutomationEditorCommonUtils::CreateNewMap() - TYLKO W EDYTORZE
-        if (Target.bBuildEditor == true)
-        {
+        if (Target.bBuildEditor == true) {
             PublicDependencyModuleNames.AddRange(new string[] { "UnrealEd", "AssetRegistry" });
         }
 

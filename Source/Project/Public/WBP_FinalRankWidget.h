@@ -1,11 +1,16 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
 #include "Components/TextBlock.h"
 #include "WBP_FinalRankWidget.generated.h"
+
+/**
+ * UWBP_FinalRankWidget
+ * The "Game Over" / Leaderboard screen.
+ * * It appears at the end of the game to show who won.
+ * * It pulls data (Names and Scores) from the GameInstance and displays them.
+ */
 
 UCLASS()
 class PROJECT_API UWBP_FinalRankWidget : public UUserWidget

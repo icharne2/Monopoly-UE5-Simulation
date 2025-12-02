@@ -9,6 +9,13 @@ class UHubMainWidget;
 class USoundBase;
 class UAudioComponent;
 
+/**
+ * UMyGameInstance
+ * A "Global" class that persists across all levels.
+ * It stores data that must not be lost when loading a new map (e.g., Player Names, Final Scores).
+ * It also manages the persistent Background Music and the Main HUD.
+ */
+
 UCLASS()
 class PROJECT_API UMyGameInstance : public UGameInstance
 {

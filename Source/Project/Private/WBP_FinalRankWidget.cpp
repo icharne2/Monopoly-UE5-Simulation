@@ -37,7 +37,5 @@ void UWBP_FinalRankWidget::NativeConstruct()
             if (Score4Text && GI->FinalScores.Num() > 3)
                 SetSafe(Score4Text, FString::FromInt(GI->FinalScores[3]));
         }
-        UE_LOG(LogTemp, Warning, TEXT("FinalRankWidget: data loaded from GameInstance."));
-
     }
 }

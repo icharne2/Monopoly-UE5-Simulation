@@ -4,8 +4,7 @@
 #include "ABoardTile.h"
 #include "MyGameMode.h"
 
-
-// Test 1 Mortgage 
+// Test 1: Mortgage 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FTileMortgageTest, "Game.Tile.Mortgage.Basic", EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
 
 bool FTileMortgageTest::RunTest(const FString& Parameters)
@@ -55,7 +54,7 @@ bool FTileRedeemTest::RunTest(const FString& Parameters)
 }
 
 
-//  Test 3 Cannot Redeem Without Money 
+// Test 3: Cannot Redeem Without Money 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FTileRedeemFailTest, "Game.Tile.Mortgage.NoMoney", EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
 
 bool FTileRedeemFailTest::RunTest(const FString& Parameters)

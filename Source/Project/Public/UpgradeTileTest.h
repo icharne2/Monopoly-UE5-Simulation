@@ -7,10 +7,17 @@
 UENUM()
 enum class EUpgradePhase : uint8
 {
-    Phase_Idle,             // waiting 1s
-    Phase_Verification,     // waiting for mesh
-    Phase_Finished
+    Phase_Idle,             // Waiting for the game to start
+    Phase_Verification,     // Waiting for mesh
+    Phase_Finished          // The test has completed (Success / Fail).
 };
+
+/**
+ * AUpgradeTileTest
+ * A Functional Test that checks the property upgrade system.
+ * * It finds a tile, forces an upgrade (buying a house), and then checks if the
+ * 3D model (mesh) actually became visible on the screen.
+ */
 
 UCLASS()
 class PROJECT_API AUpgradeTileTest : public AFunctionalTest

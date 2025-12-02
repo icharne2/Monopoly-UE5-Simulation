@@ -3,7 +3,7 @@
 #include "PlayerCharacter.h"
 #include "ABoardTile.h"
 
-//  Test 1 Buy Tile 
+// Test 1: Buy Tile 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FPlayerBuyTileTest, "Game.PlayerTile.Buy", EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
 
 bool FPlayerBuyTileTest::RunTest(const FString& Parameters)
@@ -31,7 +31,7 @@ bool FPlayerBuyTileTest::RunTest(const FString& Parameters)
 }
 
 
-//  Test 2 Rent Paid to Another Player 
+// Test 2: Rent Paid to Another Player 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FPlayerPayRentTest, "Game.PlayerTile.Rent.Payment", EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
 
 bool FPlayerPayRentTest::RunTest(const FString& Parameters)
@@ -60,7 +60,7 @@ bool FPlayerPayRentTest::RunTest(const FString& Parameters)
 }
 
 
-//  Test 3 No Rent If Tile Belongs to Player 
+//  Test 3: No Rent If Tile Belongs to Player 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FPlayerNoRentOnOwnTileTest, "Game.PlayerTile.Rent.NoSelfRent", EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
 
 bool FPlayerNoRentOnOwnTileTest::RunTest(const FString& Parameters)
@@ -76,9 +76,8 @@ bool FPlayerNoRentOnOwnTileTest::RunTest(const FString& Parameters)
 
     int32 RentBefore = Player->Money;
 
-    if (Tile->OwnerID != Player->PlayerID) {
+    if (Tile->OwnerID != Player->PlayerID)
         Player->RemoveMoney(Tile->GetBaseRent());
-    }
 
     TestEqual("Money stays the same on own tile", Player->Money, RentBefore);
 

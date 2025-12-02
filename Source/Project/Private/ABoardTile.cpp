@@ -8,9 +8,10 @@
 #include "PlayerCharacter.h"
 #include "Kismet/GameplayStatics.h"
 
-AABoardTile::AABoardTile() // constructor
+
+AABoardTile::AABoardTile()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+ 	// Disable Tick to improve performance
 	PrimaryActorTick.bCanEverTick = false;
 
 	//Create main mesh cube
@@ -56,10 +57,11 @@ void AABoardTile::BeginPlay()
 {
 	Super::BeginPlay();
 
+	// Pass tile name to Widget (if it exists).
+	// Uses Reflection to find "TileNameWBP" variable in the Widget Blueprint.
+
 	if (TileWidget) {
 		if (UUserWidget* Widget = TileWidget->GetUserWidgetObject()) {
-				// Assign tile name to the widget TextBlock using reflection,
-				// because the TileNameWBP variable cannot be accessed normally.
 			if (FProperty* Property = Widget->GetClass()->FindPropertyByName(FName("TileNameWBP"))) {
 				void* PropAddr = Property->ContainerPtrToValuePtr<void>(Widget);
 				FText NameText = FText::FromString(TileName);
@@ -77,11 +79,13 @@ void AABoardTile::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
+// Calculate base rent (percentage of tile cost)
 int32 AABoardTile::GetBaseRent() const
 {
 	return FMath::RoundToInt(TileCost * RentRate);
 }
 
+// Main rent calculation logic
 int32 AABoardTile::GetUpgradedRent() const
 {
 	float BaseRent = GetBaseRent();
@@ -111,6 +115,7 @@ int32 AABoardTile::GetUpgradedRent() const
 	return BaseRent;
 }
 
+// Preview rent for a specific level
 int32 AABoardTile::GetRentForLevel(int32 Level) const
 {
 	int32 BaseRent = GetBaseRent();
@@ -134,6 +139,7 @@ int32 AABoardTile::GetRedeemCost() const
 	return FMath::RoundToInt(TileCost * MortgageRate * (1.0f + MortgageInterestRate));
 }
 
+// Logic for upgrading the tile
 bool AABoardTile::UpgradeTile()
 {
 	// Upgrade allowed only if next level exists and field can be upgraded
@@ -149,7 +155,7 @@ bool AABoardTile::UpgradeTile()
 	return false;
 }
 
-// Update mesh 
+// Visual update (Meshes)
 void AABoardTile::UpdateUpgradeMesh()
 {
 	if (!UpgradeMesh)

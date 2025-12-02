@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -7,6 +5,16 @@
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "PlayerCharacter.generated.h"
+
+/**
+ * APlayerCharacter
+ * Represents the player's piece on the board.
+ * * This class stores all the important data for a player:
+ * - Money & Properties
+ * - Position (which tile they are on)
+ * - Status (In Jail? Bankrupt?)
+ * - Visuals (Mesh, Camera, Animations)
+ */
 
 UCLASS()
 class PROJECT_API APlayerCharacter : public ACharacter
@@ -25,16 +33,16 @@ public:
 
 	// Audio
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Audio")
-	USoundBase* OnLandSound; // dŸwiêk przy trafieniu do wiêzienia
+	USoundBase* OnLandSound; // the sound of being sent to jail
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Audio")
-	USoundBase* StartTileSound; // dŸwiêk przy przejœciu przez START
+	USoundBase* StartTileSound; // sound when passing through START
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Audio")
-	USoundBase* TaxSound; // dŸwiêk podatku
+	USoundBase* TaxSound; // tax sound
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Audio")
-	USoundBase* ChanceCardSound; // dŸwiêk karty Szansy
+	USoundBase* ChanceCardSound; // Chance card sound
 
 	// Player camera
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
@@ -179,6 +187,17 @@ protected:
 private:
 	// Help function that performs step-by-step movement
 	void MoveToNextTile(class AMyGameMode* GM);
+
+	// Movement interpolation data
+	FVector MoveStart;
+	FVector MoveEnd;
+	float MoveDuration = 0.3f;
+
+	UFUNCTION()
+	void TickMoveToNextTile();
+
+	UFUNCTION()
+	void OnStepFinished();
 
 	// Number of steps remaining
 	int32 RemainingSteps = 0;

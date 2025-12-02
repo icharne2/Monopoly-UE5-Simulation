@@ -187,7 +187,7 @@ void APlayerCharacter::MoveToNextTile(AMyGameMode* GM)
 
             // Getting to a closed laboratory (field 30)
             if (CurrentTile->TileID == 30) {
-                if(OnLandSound)
+                if (OnLandSound)
                     UGameplayStatics::PlaySound2D(this, OnLandSound);
 
                 if (bHasJailPass) {
@@ -227,7 +227,7 @@ void APlayerCharacter::MoveToNextTile(AMyGameMode* GM)
                 // If a player goes bankrupt
                 if (Money <= 0) {
                     DeclareBankruptcy();
-                    return; 
+                    return;
                 }
 
                 // If the player has not gone bankrupt
@@ -248,12 +248,13 @@ void APlayerCharacter::MoveToNextTile(AMyGameMode* GM)
             // Checking if a field belongs to another player
             if (CurrentTile->OwnerID != PlayerID && CurrentTile->OwnerID != -1) {
                 // If the field is mortgaged, DO NOT collect rent
-                if (CurrentTile->bIsMortgaged){
+                if (CurrentTile->bIsMortgaged) {
                     if (GM->CachedHubWidget) {
                         FString Msg = FString::Printf(TEXT("To pole jest zastawione, nie ponosisz kosztu czynszu."));
                         GM->CachedHubWidget->ShowMessage(Msg);
                     }
-                }else{
+                }
+                else {
                     int Rent = CurrentTile->GetUpgradedRent();
 
                     APlayerCharacter* OwnerPlayer = GM->GetPlayerByID(CurrentTile->OwnerID);
@@ -265,14 +266,14 @@ void APlayerCharacter::MoveToNextTile(AMyGameMode* GM)
                         if (bIsBankrupt) {
                             FTimerHandle RentMessageDelay;
                             GetWorld()->GetTimerManager().SetTimer(RentMessageDelay, [GM, OwnerPlayer, OldMoney, this]() {
-                                    if (OldMoney > 0) {
-                                        FString RentMsg = FString::Printf(TEXT("Dajesz %d ZR graczowi %s"), OldMoney, *OwnerPlayer->GetPlayerName());
-                                        if (GM && GM->CachedHubWidget) GM->CachedHubWidget->ShowMessage(RentMsg);
+                                if (OldMoney > 0) {
+                                    FString RentMsg = FString::Printf(TEXT("Dajesz %d ZR graczowi %s"), OldMoney, *OwnerPlayer->GetPlayerName());
+                                    if (GM && GM->CachedHubWidget) GM->CachedHubWidget->ShowMessage(RentMsg);
 
-                                        OwnerPlayer->AddMoney(OldMoney);
+                                    OwnerPlayer->AddMoney(OldMoney);
 
-                                        if (TaxSound) UGameplayStatics::PlaySound2D(this, TaxSound, 0.8f);
-                                    }
+                                    if (TaxSound) UGameplayStatics::PlaySound2D(this, TaxSound, 0.8f);
+                                }
                                 }, 2.0f, false);
                             return;
                         }
@@ -290,13 +291,14 @@ void APlayerCharacter::MoveToNextTile(AMyGameMode* GM)
                         }
                     }
                 }
-            } else if (CurrentTile->bCanBeBought && CurrentTile->OwnerID == -1){    // Field available for purchase
+            }
+            else if (CurrentTile->bCanBeBought && CurrentTile->OwnerID == -1) {    // Field available for purchase
                 if (GM->CachedHubWidget) GM->CachedHubWidget->SetBuyButtonVisible(true);
             }
-        } 
-        
+        }
+
         // Pledge/purchase of a field if we are the owner + improvement
-        if (CurrentTile->OwnerID == PlayerID) {         
+        if (CurrentTile->OwnerID == PlayerID) {
             if (GM->CachedHubWidget) {
                 // When the field is not a special field and is not blocked
                 if (CurrentTile->SpecialType == 0 && !CurrentTile->bIsMortgaged) {
@@ -306,7 +308,8 @@ void APlayerCharacter::MoveToNextTile(AMyGameMode* GM)
                     // Set button visibility depending on the result
                     GM->CachedHubWidget->SetUpgradeButtonVisible(bCanUpgrade);
 
-                } else {
+                }
+                else {
                     // Hide button for special fields (type 1 or 2) or blocked fields
                     GM->CachedHubWidget->SetUpgradeButtonVisible(false);
                 }
@@ -315,13 +318,15 @@ void APlayerCharacter::MoveToNextTile(AMyGameMode* GM)
                 if (CurrentTile->bIsMortgaged) {
                     GM->CachedHubWidget->SetRedeemButtonVisible(true);
                     GM->CachedHubWidget->SetMortgageButtonVisible(false);
-                } else // pole własne i nie zastawione — pokaż przycisk "Zastaw pole"
+                }
+                else // pole własne i nie zastawione — pokaż przycisk "Zastaw pole"
                 {
                     GM->CachedHubWidget->SetMortgageButtonVisible(true);
                     GM->CachedHubWidget->SetRedeemButtonVisible(false);
                 }
             }
-        } else {
+        }
+        else {
             // Not your own field - hide both
             if (GM->CachedHubWidget) {
                 GM->CachedHubWidget->SetMortgageButtonVisible(false);
@@ -340,7 +345,8 @@ void APlayerCharacter::MoveToNextTile(AMyGameMode* GM)
             // Normal end of turn
             if (GM->CachedHubWidget)
                 GM->CachedHubWidget->SetNextTurnButtonVisible(true);
-        } else { // Extra throw
+        }
+        else { // Extra throw
             GM->bExtraRollGranted = false; // reset flag after showing button
             if (GM->CachedHubWidget) GM->CachedHubWidget->SetRollButtonVisible(true);
         }
@@ -360,7 +366,7 @@ void APlayerCharacter::MoveToNextTile(AMyGameMode* GM)
             int32 Reward = StartTile->TileCost;
             AddMoney(Reward);
 
-            if(StartTileSound) UGameplayStatics::PlaySound2D(this, StartTileSound, 0.5f);
+            if (StartTileSound) UGameplayStatics::PlaySound2D(this, StartTileSound, 0.5f);
 
             if (GM->CachedHubWidget) {
                 FString Msg = FString::Printf(TEXT("Otrzymujesz %d ZR!"), Reward);
@@ -382,7 +388,7 @@ void APlayerCharacter::MoveToNextTile(AMyGameMode* GM)
     const float SideDistance = 10.f;
     FVector Offset(0.f);
 
-    switch (PlayerID){
+    switch (PlayerID) {
         case 1: Offset = FVector(ForwardDistance, -SideDistance, 0.f); break;
         case 2: Offset = FVector(ForwardDistance, SideDistance, 0.f); break;
         case 3: Offset = FVector(-ForwardDistance, -SideDistance, 0.f); break;
@@ -406,26 +412,56 @@ void APlayerCharacter::MoveToNextTile(AMyGameMode* GM)
         }
     }
 
-    // Animation of movement on the board
+    // Movement data setting
+    MoveStart = GetActorLocation();
+    MoveEnd = End;             // Position of the target field on the board
+    MoveDuration = 0.3f;
     ElapsedTime = 0.f;
-    const float MoveDuration = 0.3f;
-    const float MoveInterval = 0.01f;
 
-    GetWorld()->GetTimerManager().SetTimer( MoveTimerHandle, [this, GM, Start, End, MoveDuration]() mutable {
-            ElapsedTime += 0.01f;
-            float Alpha = FMath::Clamp(ElapsedTime / MoveDuration, 0.f, 1.f);
+    GetWorld()->GetTimerManager().SetTimer(
+        MoveTimerHandle,
+        this,
+        &APlayerCharacter::TickMoveToNextTile,
+        0.01f,
+        true
+    );
 
-            FVector NewLocation = FMath::Lerp(Start, End, Alpha);
-            NewLocation.Z = 41.5f;
-            SetActorLocation(NewLocation, false, nullptr, ETeleportType::TeleportPhysics);
+}
 
-            if (Alpha >= 1.f){
-                GetWorld()->GetTimerManager().ClearTimer(MoveTimerHandle);
-                // Next step after a short delay
-                FTimerHandle DelayHandle;
-                GetWorld()->GetTimerManager().SetTimer(DelayHandle, [this, GM]() { MoveToNextTile(GM); }, 0.1f, false);
-            }
-        }, MoveInterval, true );
+void APlayerCharacter::OnStepFinished()
+{
+    AMyGameMode* GM = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
+
+    // If GameMode exists, continue movement to the next tile
+    if (GM) MoveToNextTile(GM);
+}
+
+void APlayerCharacter::TickMoveToNextTile()
+{
+    // Increase how much time has passed during this step
+    ElapsedTime += 0.01f;
+
+    // Calculate how far we are between the start and end points (0.0 = start, 1.0 = end)
+    float Alpha = FMath::Clamp(ElapsedTime / MoveDuration, 0.f, 1.f);
+
+    FVector NewLocation = FMath::Lerp(MoveStart, MoveEnd, Alpha);
+    NewLocation.Z = 41.5f;
+    SetActorLocation(NewLocation);
+
+    if (Alpha >= 1.f) {
+        // Stop the current movement timer
+        GetWorld()->GetTimerManager().ClearTimer(MoveTimerHandle);
+
+        // Small delay before moving to the next tile
+        FTimerHandle Delay;
+        GetWorld()->GetTimerManager().SetTimer(
+            Delay,
+            this,
+            &APlayerCharacter::OnStepFinished,// calls the function to continue movement
+            0.1f,
+            false
+        );
+    }
 }
 
 void APlayerCharacter::PlayMoveAnimation()
@@ -506,7 +542,7 @@ void APlayerCharacter::RedeemTile()
 }
 
 // Bonuses for special fields type 1 and 2
-// Function for testing purposes - test by bp whether bonuses work
+// Function for testing purposes, test by bp whether bonuses work
 void APlayerCharacter::RebuildOwnedTilesFromBoard()
 {
     AMyGameMode* GM = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
