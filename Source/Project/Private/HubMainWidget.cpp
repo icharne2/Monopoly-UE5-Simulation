@@ -368,7 +368,7 @@ void UHubMainWidget::UpdateTileCard(AABoardTile* Tile)
         }
 
         if (cena_zakupu)
-            cena_zakupu->SetText(FText::FromString(TEXT("Czas na Szansę! Może dziekan odwołał kolokwium, a może system USOS znów wyzerował Twoje punkty. Los bywa kapryśny - weź karte i przekonaj się!")));
+            cena_zakupu->SetText(FText::FromString(TEXT("Czas na Szansę! Może prowadzący odwołał kolokwium, a może system USOS znów wyzerował Twoje punkty. Los bywa kapryśny - weź karte i przekonaj się!")));
 
         return;
     }
