@@ -83,7 +83,7 @@ void AMyGameMode::BeginPlay()
 
         APlayerCharacter* CurrentPlayer = GetPlayerByID(CurrentPlayerID);
         if (CurrentPlayer && CachedHubWidget) {
-            FString TurnText = FString::Printf(TEXT("Player turn: %s"), *CurrentPlayer->GetPlayerName());
+            FString TurnText = FString::Printf(TEXT("Tura gracza: %s"), *CurrentPlayer->GetPlayerName());
             CachedHubWidget->UpdateTurn(TurnText);
         }
 
