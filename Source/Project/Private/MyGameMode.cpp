@@ -215,7 +215,7 @@ void AMyGameMode::NextTurn()
         return;
     }
 
-    FString TurnText = FString::Printf(TEXT("Player turn: %s"), *CurrentPlayer->GetPlayerName());
+    FString TurnText = FString::Printf(TEXT("Tura gracza: %s"), *CurrentPlayer->GetPlayerName());
     if (CachedHubWidget)
         CachedHubWidget->UpdateTurn(TurnText);
 
